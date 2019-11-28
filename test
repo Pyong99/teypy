@@ -1,0 +1,131 @@
+package stia1113;
+import java.util.Scanner;
+
+public class NextDayDelivery {
+	
+	public static void main(String[]args) {
+		Scanner input = new Scanner(System.in);
+		String choice = "1 Yes"+"\n"+"2 No";
+		int chose ;
+
+		do {
+			System.out.println("Do you want Next-Day Delivery?"+"\n"+choice);
+			chose = input.nextInt();
+			if (chose<1||chose>2) {
+				System.out.println("Please enter valid choice.");				
+			}else {
+				switch(chose) {
+				case 1:
+					System.out.println("Enter your package type:"+"\n"+"1 Document(below 2kg)"+"\n"+"2 Parcel(abouve 2kg)");
+					int packagetype = input.nextInt();
+					if(packagetype<1||packagetype>2) {
+						System.out.println("Please enter valid choice.");
+					}else {
+						switch(packagetype) {
+						case 1:
+							System.out.println("Enter your zone:"+"\n"+"1 Zone 1"+"\n"+"2 Zone 2"+"\n"+"3 Zone 3"+"\n"+"4 Zone 4"+"\n"+"5 Zone 5");
+							int dzone = input.nextInt();
+							if(dzone<1||dzone>5) {
+								System.out.println("Please enter valid zone.");
+							}else {
+								switch(dzone) {
+								case 1:
+									dmethod(4.9,0.8);									
+									break;							
+								case 2:
+									dmethod(5.4,1);
+									break;
+								case 3:
+									dmethod(6.9,1.5);
+									break;
+								case 4:
+									dmethod(7.4,1.5);
+									break;
+								case 5:	
+									dmethod(7.9,2);
+									break;
+								}
+							}
+							break;
+							
+						case 2:	
+							System.out.println("Enter your zone:"+"\n"+"1 Zone 1"+"\n"+"2 Zone 2"+"\n"+"3 Zone 3"+"\n"+"4 Zone 4"+"\n"+"5 Zone 5");
+							int pzone = input.nextInt();
+							if(pzone<1|pzone>5) {
+								System.out.println("Please enter valid zone.");
+								
+							}else {
+								switch(pzone) {
+								case 1:
+									pmethod(10.5,0.5);
+									break;
+													
+								case 2:
+									pmethod(16,2);
+									break;
+								case 3:
+									pmethod(21,3);
+									break;
+								case 4:
+									pmethod(26,3.5);
+									break;
+								case 5:	
+									pmethod(31,4);
+									break;	
+								}
+							break;
+							}
+						}
+					}
+					
+				case 2:
+					break;
+				}
+
+			}
+		}while(chose<1|chose>2);
+
+		
+		input.close();
+	}
+
+	public static double dmethod(double fdPrice,double sdPrice){
+
+		Scanner input = new Scanner(System.in);
+		double dPrice=0, totalsdPrice=0;;
+		System.out.println("Enter the document's weight in g");
+		double dWeight = input.nextDouble();	
+		
+		int i =(int)((((dWeight-500)/250)/1000)+1);
+		totalsdPrice=i*sdPrice;	
+		dPrice=fdPrice+totalsdPrice;
+		
+
+		String documentprice = String.format("%.2f",dPrice);	
+		System.out.println("Your Next-Day Delivery is RM"+documentprice);
+		input.close();
+	return dPrice;	
+	}
+
+	public static double pmethod(double fpPrice,double spPrice) {	
+		Scanner input = new Scanner(System.in);
+		double pPrice=0,totalspPrice=0;
+		System.out.println("Enter the parcel's weight in kg:");
+		double pWeight = input.nextDouble();	
+		
+		
+		int i =(int)(((pWeight-2.5)/0.5)+1);
+		totalspPrice=i*spPrice;	
+		pPrice=fpPrice+totalspPrice;
+			
+		String parcelPrice = String.format("%.2f",pPrice);	
+		System.out.println("Your Next-Day Delivery is RM"+parcelPrice);
+		input.close();
+		
+	return pPrice;
+		
+	}
+}
+
+
+
